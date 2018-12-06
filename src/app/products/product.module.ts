@@ -13,6 +13,7 @@ import { ProductResolver } from './product-resolver.service';
 import { ProductEditInfoComponent } from './product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit-tags.component';
 import { AuthGuard } from '../user/auth-guard.service';
+import { ProductEditingGuard } from './product-guard.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { AuthGuard } from '../user/auth-guard.service';
       children: [
       {path: '', component: ProductListComponent},
       {path: ':id', component: ProductDetailComponent, resolve: {product : ProductResolver}},
-      {path: ':id/edit', component: ProductEditComponent, resolve: {product : ProductResolver},
+      {path: ':id/edit', component: ProductEditComponent, canDeactivate: [ProductEditingGuard], resolve: {product : ProductResolver},
       children: [
         {path: '', redirectTo: 'info', pathMatch: 'full'},
         {path: 'info', component: ProductEditInfoComponent},
@@ -42,7 +43,8 @@ import { AuthGuard } from '../user/auth-guard.service';
   ],
   providers: [
     ProductService,
-    ProductResolver
+    ProductResolver,
+    ProductEditingGuard
   ]
 })
 export class ProductModule {}
