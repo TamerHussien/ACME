@@ -11,7 +11,7 @@ import { MessageService } from './messages/message.service';
 export class AppComponent {
     pageTitle: string = 'Acme Product Management';
     loading: boolean = true;
-    constructor(private authService: AuthService, private router: Router, private messageService: MessageService) {
+    constructor(public authService: AuthService, private router: Router, public messageService: MessageService) {
         router.events.subscribe((routerEvent: Event) => {
             this.checkRouteEvent(routerEvent);
         });

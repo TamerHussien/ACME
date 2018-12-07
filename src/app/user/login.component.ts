@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     errorMessage: string;
     pageTitle = 'Log In';
-
+    password;
+    userName;
     constructor(private authService: AuthService, private router: Router) { }
 
     login(loginForm: NgForm) {
